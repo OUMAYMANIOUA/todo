@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My to do list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <!-- Boucle sur le tableau tasks pour afficher chaque tâche -->
+    <ion-item *ngFor="let task of tasks; let i = index" class="task-item">
+      <!-- Affiche le titre de la tâche ou un champ d'entrée si la tâche est en cours d'édition -->
+      <ion-label *ngIf="editingTaskIndex !== i">{{ task.title }}</ion-label>
+      <ion-input *ngIf="editingTaskIndex === i" [(ngModel)]="editedTaskTitle"></ion-input>
+
+      <!-- Checkbox pour marquer la tâche comme terminée -->
+      <ion-checkbox slot="end" [(ngModel)]="task.done" (ionChange)="toggleTaskStatus(i)"></ion-checkbox>
+
+      <!-- Icône d'édition pour démarrer l'édition -->
+      <ion-icon *ngIf="editingTaskIndex !== i" name="create" slot="end" (click)="startEditingTask(i)"></ion-icon>
+      <!-- Icône de corbeille pour supprimer la tâche -->
+      <ion-icon *ngIf="editingTaskIndex !== i" name="trash" slot="end" (click)="confirmDeleteTask(i)"></ion-icon>
+
+      <!-- Bouton de sauvegarde lors de l'édition -->
+      <ion-button *ngIf="editingTaskIndex === i" slot="end" color="primary" (click)="saveEditedTask()">Save</ion-button>
+      <!-- Bouton d'annulation lors de l'édition -->
+      <ion-button *ngIf="editingTaskIndex === i" slot="end" color="secondary" (click)="cancelEditingTask()">Cancel</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <!-- Champ d'entrée pour saisir une nouvelle tâche -->
+      <ion-input placeholder="New task" [(ngModel)]="newTask"></ion-input>
+      <!-- Bouton "Add" pour ajouter une nouvelle tâche -->
+      <ion-button color="primary" (click)="addTask()">Add</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

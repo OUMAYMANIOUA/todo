@@ -1,0 +1,15 @@
+.task-item {
+  ion-label {
+    text-decoration: none; // Pas de décoration sur le texte de la tâche
+  }
+
+  ion-checkbox {
+    --background: #3880ff; // Couleur de fond de la checkbox
+    --border-color: #3880ff; // Couleur de bordure de la checkbox
+  }
+
+  ion-icon {
+    color: #f04141; // Couleur de l'icône de corbeille (rouge)
+    cursor: pointer; // Curseur pointer pour indiquer que l'icône est cliquable
+  }
+}
